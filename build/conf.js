@@ -23,7 +23,8 @@ export default {
   },
   backend : {
     dir      : backendPath,
-    entryFile: path.join(serverPath, './index.js')
+    entryFile: path.join(serverPath, './index.js'),
+    specs    : path.join(backendPath, '/**/*.spec.js')
   },
   build   : {
     dir       : path.join(basePath, './dist_client'),

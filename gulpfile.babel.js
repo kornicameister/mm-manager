@@ -9,7 +9,7 @@ import {clean, distFolder} from './build/tasks/common';
 import {index} from './build/tasks/index';
 import {serve} from './build/tasks/serve';
 import {watch} from './build/tasks/watch';
-import {testUnit, testE2E} from './build/tasks/test';
+import {testUnit, testE2E, testBackend, testBackendWatch} from './build/tasks/test';
 import {karma} from './build/tasks/karma';
 import {compileBackend} from './build/tasks/backend/compile';
 import {runBackend} from './build/tasks/backend/run';
@@ -39,6 +39,7 @@ gulp.task('dev', (done) => {
   return runSequence.use(gulp)(
     'build',
     ['dev:serve', 'dev:watch'],
+    ['backend'],
     done
   );
 });
@@ -58,6 +59,8 @@ gulp.task('test', (done) => {
 gulp.task('karma', karma());
 gulp.task('test:unit', ['karma'], testUnit());
 gulp.task('test:e2e', testE2E());
+gulp.task('test:backend:once', testBackend());
+gulp.task('test:backend', ['test:backend:once'], testBackendWatch());
 
 gulp.task('backend:dist', backendDistFolder());
 gulp.task('backend:compile', ['backend:dist'], compileBackend());
