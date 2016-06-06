@@ -3,7 +3,7 @@
 import gulp from 'gulp';
 import gulpInject from 'gulp-inject';
 import gulpIf from 'gulp-if';
-import gulpMinifyHtml from 'gulp-minify-html';
+import gulpHtmlMin from 'gulp-htmlmin';
 import path from 'path';
 
 import conf from '../conf';
@@ -32,7 +32,7 @@ export function index(isProduction = false) {
         .pipe(gulpInject(injectScripts, injectOptions))
         .pipe(gulpIf(
             isProduction,
-            gulpMinifyHtml()
+          gulpHtmlMin()
         ))
         .pipe(gulp.dest(indexPath));
   };
